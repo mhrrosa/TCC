@@ -1,0 +1,64 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09/11/2020, 13:34:14
+    Author     : deia_
+*/
+.sucesso{
+    
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    height: 0px;
+    animation-name: animacao_sucesso;
+    animation-duration: 5s;
+
+}
+
+@keyframes animacao_sucesso {
+
+	from{
+            background: green;
+            color: white;
+            width: 383px;
+            height: 20px;
+        }
+        
+	to{
+            background: none;
+            width: 383px;
+            height: 0px;
+            display: none;
+        }
+
+}
+.erro{
+    
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    height: 0px;
+    animation-name: animacao_erro;
+    animation-duration: 10s;
+    
+}
+
+@keyframes animacao_erro {
+
+	from{
+            background: red;
+            width: 383px;
+            height: 20px;
+        }
+        
+	to{
+            background: none;
+            width: 383px;
+            height: 0px;
+            display: none;
+        }
+
+}
