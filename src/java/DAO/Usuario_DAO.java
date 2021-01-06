@@ -49,7 +49,8 @@ public class Usuario_DAO {
            stat.setString(9, usuario.getClasse());
            
            stat.execute();
-           
+           stat.close();
+          
        }catch(SQLException ex){
            System.out.println(ex.getMessage());
        }
@@ -84,12 +85,15 @@ public class Usuario_DAO {
                 usuario.setFoto_perfil(rs.getString("foto_perfil"));
                    
                 User.add(usuario);
+                
             }
             
             stmt.executeQuery();
+            rs.close();
+            stmt.close(); 
             
             return User;
-     
+            
         }catch(SQLException ex){
             throw new RuntimeException(ex);
         }
@@ -113,11 +117,12 @@ public class Usuario_DAO {
                 usuario.setSenha(rs.getString("senha"));
                 
                 return usuario;
+                
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        
+       
         return null;
     }
    
@@ -166,5 +171,21 @@ public class Usuario_DAO {
        }
         
     }
-    
+    public void deleta_Usuario(int id_usuario)
+    {
+        String sql_usuario = "DELETE FROM usuario WHERE id_usuario = ?";
+        
+        
+        try{
+            PreparedStatement stmt = conexao_BD.prepareStatement(sql_usuario);
+            stmt.setInt( 1, id_usuario );
+            stmt.execute();
+            
+           
+            
+            stmt.close();
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

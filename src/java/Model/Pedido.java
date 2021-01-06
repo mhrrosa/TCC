@@ -9,10 +9,30 @@ package Model;
  *
  * @author deia_
  */
-public class Carrinho
-{
+public class Pedido {
+    private int id_pedido;
     private int id_usuario;
     private int id_produto;
+    private String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public int getId_pedido() {
+        return id_pedido;
+    }
+
+    public void setId_pedido(int id_pedido) {
+        this.id_pedido = id_pedido;
+    }
+    
+    
+    
 
     public int getId_usuario() {
         return id_usuario;
@@ -30,5 +50,5 @@ public class Carrinho
         this.id_produto = id_produto;
     }
     
+    
 }
-

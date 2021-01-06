@@ -20,7 +20,7 @@ import java.sql.SQLException;
             Connection c = null;
         try{
             carregaDriver();
-            c = DriverManager.getConnection("jdbc:postgresql://localhost/drivesuper_db", "postgres", "aluno");
+            c = DriverManager.getConnection("jdbc:postgresql://localhost/tcc_bd", "postgres", "123");
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }finally{

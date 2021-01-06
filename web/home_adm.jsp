@@ -1,6 +1,6 @@
 <%-- 
-    Document   : adm
-    Created on : 30/10/2020, 11:57:44
+    Document   : nao adm
+    Created on : 30/10/2020, 12:00:27
     Author     : deia_
 --%>
 
@@ -16,13 +16,12 @@
         <title>Home ADM</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/newcss.css" rel="stylesheet">
 
 
         <link rel="icon" href="imagens/logo.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    <body>
         <%
             HttpSession sessao = request.getSession();
             try {
@@ -30,7 +29,7 @@
         <jsp:forward page="index.jsp" />
         <%
         } else if (sessao.getAttribute("classeUsuarioLogado").equals("2")) {%>
-        <jsp:forward page="home_usuario.jsp" />
+        <jsp:forward page="home.jsp" />
         <%
                 }
             } catch (Exception e) {
@@ -38,7 +37,7 @@
             }
         %>
         <%
-            int pagina_produto = 1;
+            
             
            Produto_DAO dao_produto = new Produto_DAO();
             
@@ -46,6 +45,9 @@
 
             
         %>
+    </head>
+    <body>
+        
         <div class="${css_class}">${message}</div>
         <nav class="navbar navbar-default">
             <div class="collapse navbar-collapse" id="barra_navegacao">
@@ -58,8 +60,7 @@
 
             <div class="col-md-4"></div>
             <div class="col-md-5" style="margin: 0px; padding: 0px;">                      
-                <a class="btn btn-danger" href="cadastro_produto.jsp" role="button" style="margin-right: 5px">Cadastrar produto</a>
-                 <a href="carrinho.jsp" class="btn btn-danger" role="button"> Carrinho </a> |
+                <a class="btn btn-danger" href="cadastro_produto.jsp" role="button" style="margin-right: 5px">Cadastrar produto</a> |
                 <a href="Mostrar_Editar_Usuario" class="btn btn-danger" role="button"style="margin-right: 5px"> Editar Perfil </a>
                 <a href="Mostrar_Usuario" class="btn btn-danger" role="button"> Perfil </a>
             </div>
@@ -145,7 +146,9 @@
                             
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail" style="width: 250px; background: white;border-radius: 5px; margin: 20px 0px; padding: 0px;">
-                                    <img class="img_produto" style="border-radius: 10px; width: 236px; height: 200px; margin-top: 5px;" src="http://<%=ip + ":8080/Web_DriveSuper/" + prod.getFoto_1() %>" alt="...">
+                                   <a href="Mostrar_Produto?param=<%= prod.getId_produto() %>">
+                                       <img class="img_produto" style="border-radius: 10px; width: 236px; height: 200px; margin-top: 5px;" src="http://<%=ip + ":8080/Web_DriveSuper/" + prod.getFoto_1() %>" alt="..." >
+                                       </a>
                                     <div class="caption">
                                         <h3 name="nome_produto" style=""> <%= prod.getNome_produto() %> </h3>
                                         <p> <span style="border-bottom-left-radius: 5px; border-top-left-radius: 5px; background: #ff6565; color: white; padding: 3px;">Preço </span>
@@ -153,14 +156,16 @@
                                         <p> <span style="border-bottom-left-radius: 5px; border-top-left-radius: 5px; background: #ff6565; color: white; padding: 3px;">Categoria </span>
                                             <span style="border-bottom-right-radius: 5px; border-top-right-radius: 5px;color: black; padding: 3px;"> <%= prod.getCategoria_produto() %> </span> </p>
                                         
-                                        <p><a href="Mostrar_Produto?param=<%= prod.getId_produto() %>" class="btn btn-danger" role="button">Ver Produto</a>
-                                      
-                                        <p><a href="Carrinho_Add?param=<%= prod.getId_produto() %>" class="btn btn-danger">Adicionar ao Carrinho</a></p>
                                         
+                                       
                                         
                                                                                                                                                           
                                     </div>
+                                            <div style=" width: 100%; height: 50px; background:#ff6565;">
+                                         <p><a href="Carrinho_Add?param=<%= prod.getId_produto()%>" style="color:white; font-size: 20px; margin-left: 60px; text-decoration: none;" > Fazer Pedido </a></p>
+                                        </div>
                                 </div>
+                                             
                             </div>
                             
                            

@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import static DAO.Usuario_DAO.c;
 import Jdbc.Connection_Factory;
 import Model.Produto;
 import java.sql.Connection;
@@ -42,7 +43,7 @@ public class Produto_DAO {
            stat.setString(5, produto.getDescricao_produto());
            
            stat.execute();
-           
+           stat.close(); 
        }catch(SQLException ex){
            System.out.println(ex.getMessage());
        }
@@ -70,19 +71,20 @@ public class Produto_DAO {
                 produto.setId_categoria(rs.getInt("id_categoria"));
                 produto.setCategoria_produto(rs.getString("nome_categoria"));
                 produto.setPreco_produto(rs.getFloat("preco_produto"));
-                produto.setCarrinho(rs.getInt("carrinho"));
                 produto.setDescricao_produto(rs.getString("descricao_produto"));
                 produto.setFoto_1(rs.getString("foto_1"));
                 
-                
+               
                 Prod.add( produto );
+                c.close();
                 
             }
   
             stmt.executeQuery();
-            
+            rs.close();
+            stmt.close(); 
             return Prod;
-            
+              
         }catch(SQLException ex){
             throw new RuntimeException(ex);
         }
@@ -131,16 +133,20 @@ public class Produto_DAO {
         }
          public void deleta_Produto(int id_produto)
     {
-        String sql_favoritos = "DELETE FROM carrinho WHERE id_produto = ?";
+        
+        String sql_pedido = "DELETE FROM pedidos WHERE id_produto = ?";
         String sql_produtos = "DELETE FROM produto WHERE id_produto = ?";
         
         try{
-            PreparedStatement stmt = conexao_BD.prepareStatement(sql_favoritos);
-            stmt.setInt( 1, id_produto );
+            
+            
+            PreparedStatement stmt = conexao_BD.prepareStatement(sql_pedido);
+            stmt.setInt(1, id_produto );
             stmt.execute();
             
+          
             stmt = conexao_BD.prepareStatement(sql_produtos);
-            stmt.setInt(1, id_produto );
+            stmt.setInt( 1, id_produto );
             stmt.execute();
             
             stmt.close();

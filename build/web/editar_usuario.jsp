@@ -103,7 +103,12 @@
 
                                 <p style="margin: 20px 0px;margin-left: 80%">
                                     <input type="submit" value="Editar Perfil" class="btn btn-danger">
+                                    <br>
+                                    <br>
+                                    <a href="Deleta_Usuario?param=<%= id_usuario %>" class="btn btn-danger" role="button" onclick="aa"> Deletar Conta </a>
+                                    
                                 </p>
+                               
 
                             </div>
                             

@@ -5,25 +5,20 @@
  */
 package Servlet;
 
-import DAO.Carrinho_DAO;
-import DAO.Produto_DAO;
+import DAO.Usuario_DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author deia_
  */
-public class Deleta_Carrinho extends HttpServlet {
+public class Deleta_Usuario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,25 +29,21 @@ public class Deleta_Carrinho extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         Integer id_produto = Integer.parseInt(request.getParameter("param"));
+        Integer id_usuario = Integer.parseInt(request.getParameter("param"));
         
-        Carrinho_DAO dao_carrinho = new Carrinho_DAO();
-         
-        HttpSession sessao = request.getSession();
-        int id_usuario = (int) sessao.getAttribute("idUsuarioLogado");
+        Usuario_DAO dao = new Usuario_DAO();
         
-        dao_carrinho.deleta_carrinho(id_usuario, id_produto );
+        dao.deleta_Usuario( id_usuario );
         
-        request.setAttribute("message", "Produto deletado com sucesso!");
+        request.setAttribute("message", "usuario deletado com sucesso");
         request.setAttribute("css_class", "sucesso");
         
-        RequestDispatcher rd = request.getRequestDispatcher("home_adm.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
         rd.forward(request, response);
     }
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -66,11 +57,7 @@ public class Deleta_Carrinho extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Deleta_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -84,11 +71,7 @@ public class Deleta_Carrinho extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(Deleta_Carrinho.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

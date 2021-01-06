@@ -5,7 +5,8 @@
  */
 package Servlet;
 
-import DAO.Carrinho_DAO;
+import DAO.Pedidos_DAO;
+import DAO.Produto_DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author deia_
  */
-public class Carrinho_Add extends HttpServlet {
+public class Deleta_Pedido extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,18 +37,22 @@ public class Carrinho_Add extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        Integer id_produto = Integer.parseInt(request.getParameter("param"));
+         Integer id_produto = Integer.parseInt(request.getParameter("param"));
+        
+        Pedidos_DAO dao_carrinho = new Pedidos_DAO();
+         
         HttpSession sessao = request.getSession();
         int id_usuario = (int) sessao.getAttribute("idUsuarioLogado");
         
-        Carrinho_DAO dao_carrinho = new Carrinho_DAO();
+        dao_carrinho.deleta_pedidos(id_usuario, id_produto );
         
-        dao_carrinho.insere_carrinho(id_usuario, id_produto);
+        request.setAttribute("message", "Produto deletado com sucesso!");
+        request.setAttribute("css_class", "sucesso");
+        
         RequestDispatcher rd = request.getRequestDispatcher("home_adm.jsp");
-                rd.forward(request, response);
-               
-                
+        rd.forward(request, response);
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -64,7 +69,7 @@ public class Carrinho_Add extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Carrinho_Add.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Deleta_Pedido.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -82,7 +87,7 @@ public class Carrinho_Add extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(Carrinho_Add.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Deleta_Pedido.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

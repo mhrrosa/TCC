@@ -58,11 +58,19 @@
     </servlet>
     <servlet>
         <servlet-name>Carrinho_Add</servlet-name>
-        <servlet-class>Servlet.Carrinho_Add</servlet-class>
+        <servlet-class>Servlet.Pedido_Add</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Deleta_Carrinho</servlet-name>
-        <servlet-class>Servlet.Deleta_Carrinho</servlet-class>
+        <servlet-class>Servlet.Deleta_Pedido</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Deleta_Pedido</servlet-name>
+        <servlet-class>Servlet.Deleta_Pedido</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Deleta_Usuario</servlet-name>
+        <servlet-class>Servlet.Deleta_Usuario</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Cadastra_Produto</servlet-name>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>Deleta_Carrinho</servlet-name>
         <url-pattern>/Deleta_Carrinho</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Deleta_Pedido</servlet-name>
+        <url-pattern>/Deleta_Pedido</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Deleta_Usuario</servlet-name>
+        <url-pattern>/Deleta_Usuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

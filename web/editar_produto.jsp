@@ -11,7 +11,7 @@
 
 <%@page import="Model.Categoria"%>
 <%@page import="DAO.Categoria_DAO"%>
-<%@page import="Model.Carrinho"%>
+
 <%@page import="java.net.InetAddress"%>
 <%@page import="Servlet.Mostrar_Produto"%>
 <%@page import="javafx.collections.ObservableList"%>

@@ -68,7 +68,7 @@ public class Editar_Produto extends HttpServlet {
         
         dao.update_produto(prod);
         
-        request.getRequestDispatcher("/meus_produtos.jsp").forward(request, response);
+        request.getRequestDispatcher("/home.jsp").forward(request, response);
         
     }
 

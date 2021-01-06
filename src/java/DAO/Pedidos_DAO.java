@@ -6,7 +6,7 @@
 package DAO;
 
 import Jdbc.Connection_Factory;
-import Model.Carrinho;
+import Model.Pedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,53 +18,56 @@ import javafx.collections.ObservableList;
  *
  * @author deia_
  */
-public class Carrinho_DAO {
+public class Pedidos_DAO {
      public static Connection conexao_BD;
   
-    public Carrinho_DAO()
+    public Pedidos_DAO()
     {
-        Carrinho_DAO.conexao_BD = Connection_Factory.getConnection();
+        Pedidos_DAO.conexao_BD = Connection_Factory.getConnection();
     }
     
-    public ObservableList<Carrinho> select_Carrinho()
+    public ObservableList<Pedido> select_Pedidos()
     {
         try{
            
-            ObservableList<Carrinho> carr = FXCollections.observableArrayList();
+            ObservableList<Pedido> pedi = FXCollections.observableArrayList();
             PreparedStatement stmt = this.conexao_BD.prepareStatement(
-                "SELECT * FROM carrinho" 
+                "SELECT * FROM pedidos" 
             );
             
             ResultSet rs = stmt.executeQuery();
             
             while(rs.next()){
  
-                Carrinho car = new Carrinho();
+                Pedido ped = new Pedido();
                 
-                car.setId_usuario(rs.getInt("id_usuario"));
-                car.setId_produto(rs.getInt("id_produto"));
+                ped.setId_pedido(rs.getInt("id_pedido"));
+                ped.setId_usuario(rs.getInt("id_usuario"));
+                ped.setId_produto(rs.getInt("id_produto"));
+                ped.setTipo(rs.getString("tipo"));
                 
-                carr.add( car );
+                pedi.add( ped );
                 
             }
   
             stmt.executeQuery();
-            
-            return carr;
+            stmt.close(); 
+            return pedi;
             
         }catch(SQLException ex){
             throw new RuntimeException(ex);
         }
     }
-    public void insere_carrinho(int id_usuario, int id_produto) throws SQLException{
+    public void insere_pedidos(int id_usuario, int id_produto, String tipo) throws SQLException{
         
         PreparedStatement stmt = this.conexao_BD.prepareStatement(
-                "INSERT INTO carrinho (id_usuario, id_produto) VALUES (?, ?)" 
+                "INSERT INTO pedidos (id_usuario, id_produto, tipo) VALUES (?, ?,?)" 
         );
         
         try{
             stmt.setInt(1, id_usuario);
             stmt.setInt(2, id_produto);
+            stmt.setString(3, tipo);
             stmt.execute();
             stmt.close();
         }catch(SQLException e){
@@ -72,10 +75,10 @@ public class Carrinho_DAO {
         }
         
     }
-     public void deleta_carrinho(int id_usuario, int id_produto) throws SQLException
+     public void deleta_pedidos(int id_usuario, int id_produto) throws SQLException
     {
         PreparedStatement stmt = this.conexao_BD.prepareStatement(
-                "DELETE FROM carrinho WHERE id_usuario = ? AND id_produto = ?"
+                "DELETE FROM pedidos WHERE id_usuario = ? AND id_produto = ?"
         );
         
         try{

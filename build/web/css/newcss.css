@@ -3,3 +3,8 @@ background: rgb(255,255,255);
 background: linear-gradient(135deg, rgba(255,255,255,1) 16%, rgba(255,73,73,0.9556197478991597) 52%);
 }
 
+.linha-vertical {
+  height: 500px;/*Altura da linha*/
+  border-left: 1px solid;/* Adiciona borda esquerda na div como ser fosse uma linha.*/
+}
+

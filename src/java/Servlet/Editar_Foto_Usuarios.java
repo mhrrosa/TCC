@@ -38,7 +38,7 @@ public class Editar_Foto_Usuarios extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		/*Obtem o caminho relatorio da pasta img*/
-		String path = request.getServletContext().getRealPath("img")+ File.separator;
+		String path = request.getRealPath("img")+ File.separator;
 		
                 System.out.println("OLA:" + path);
                 
